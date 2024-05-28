@@ -1,0 +1,3 @@
+apiURL: https://hacker-news.firebaseio.com/v0
+webURL: https://news.ycombinator.com
+logsPath: logs
