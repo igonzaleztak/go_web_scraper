@@ -1,3 +1,0 @@
-{"level":"info","ts":1716912413.055551,"msg":"[scraper] starting scraping function "}
-{"level":"debug","ts":1716912413.0556657,"msg":"[scraper.ScrapFromAPI] starting API scraper"}
-{"level":"debug","ts":1716912413.0557299,"msg":"[scraper.ScrapFromAPI] got hacker news API host: https://hacker-news.firebaseio.com/v0"}

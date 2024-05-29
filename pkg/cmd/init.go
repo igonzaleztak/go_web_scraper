@@ -34,7 +34,9 @@ func setDefaultFlags() error {
 	// set default flags
 	config.CmdFlags.Mode = enums.ModeTypeAPI
 	config.CmdFlags.Verbose = enums.VerboseModeLog
-	config.CmdFlags.Sources = []string{enums.SectionTypeNew.String()}
+	config.CmdFlags.MaxStories = 30
+	config.CmdFlags.NumWords = 5
+	config.CmdFlags.Section = enums.SectionTypeNew
 
 	return nil
 }

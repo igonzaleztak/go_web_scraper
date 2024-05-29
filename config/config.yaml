@@ -1,3 +1,4 @@
-apiURL: https://hacker-news.firebaseio.com/v0
-webURL: https://news.ycombinator.com
+hackersNewsAPI: https://hacker-news.firebaseio.com/v0
+#webURL: https://news.ycombinator.com
+spaceFlightNewsAPI: https://api.spaceflightnewsapi.net/v4
 logsPath: logs

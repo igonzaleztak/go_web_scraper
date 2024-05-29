@@ -6,7 +6,6 @@ import "fmt"
 type SectionType string
 
 const (
-	SectionInvalid      SectionType = "invalid"
 	SectionTypeNew      SectionType = "new" // newstories
 	SectionTypePast     SectionType = "past"
 	SectionTypeComments SectionType = "comments"
@@ -16,21 +15,12 @@ const (
 	SectionTypeSubmit   SectionType = "submit"
 )
 
-func (s SectionType) String() string {
-	return string(s)
+func (s *SectionType) String() string {
+	return string(*s)
 }
 
-func (s SectionType) IsValid() bool {
-	switch s {
-	case SectionTypeNew, SectionTypePast, SectionTypeComments, SectionTypeAsk, SectionTypeShow, SectionTypeJobs, SectionTypeSubmit:
-		return true
-	default:
-		return false
-	}
-}
-
-func (s SectionType) ApiString() string {
-	switch s {
+func (s *SectionType) ApiString() string {
+	switch *s {
 	case SectionTypeNew:
 		return "newstories"
 	case SectionTypePast:
@@ -50,23 +40,34 @@ func (s SectionType) ApiString() string {
 	}
 }
 
-func ParseSectionType(s string) (SectionType, error) {
-	switch s {
+func (s *SectionType) Set(section string) error {
+	switch section {
 	case "new":
-		return SectionTypeNew, nil
+		*s = SectionTypeNew
+		return nil
 	case "past":
-		return SectionTypePast, nil
+		*s = SectionTypePast
+		return nil
 	case "comments":
-		return SectionTypeComments, nil
+		*s = SectionTypeComments
+		return nil
 	case "ask":
-		return SectionTypeAsk, nil
+		*s = SectionTypeAsk
+		return nil
 	case "show":
-		return SectionTypeShow, nil
+		*s = SectionTypeShow
+		return nil
 	case "jobs":
-		return SectionTypeJobs, nil
+		*s = SectionTypeJobs
+		return nil
 	case "submit":
-		return SectionTypeSubmit, nil
+		*s = SectionTypeSubmit
+		return nil
 	default:
-		return SectionInvalid, fmt.Errorf("invalid section type: %s", s)
+		return fmt.Errorf("invalid section type: %s. Must be %s, %s, %s, %s, %s, %s or %s", section, SectionTypeNew, SectionTypePast, SectionTypeComments, SectionTypeAsk, SectionTypeShow, SectionTypeJobs, SectionTypeSubmit)
 	}
+}
+
+func (s *SectionType) Type() string {
+	return "section"
 }
