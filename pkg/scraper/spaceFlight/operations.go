@@ -8,10 +8,10 @@ import (
 )
 
 // splitStoriesByLength splits the stories into two categories: short and long. Short stories are those with a title length of less than 5 words. Long stories are those with a title length of more than 5 words.
-func splitStoriesByLength(stories []schemas.SpaceFlightNews) (DataSpaceFlight, DataSpaceFlight) {
+func splitStoriesByLength(stories []schemas.SpaceFlightNews) (short DataSpaceFlight, long DataSpaceFlight) {
 	logs.Logger.Info("[scraper.SplitStoriesByLength] splitting stories by length")
-	short := make(DataSpaceFlight, 0)
-	long := make(DataSpaceFlight, 0)
+	short = make(DataSpaceFlight, 0)
+	long = make(DataSpaceFlight, 0)
 
 	for _, story := range stories {
 		logs.Logger.Debugf("[scraper.SplitStoriesByLengths] checking story %d with title `%s`", story.ID, story.Title)

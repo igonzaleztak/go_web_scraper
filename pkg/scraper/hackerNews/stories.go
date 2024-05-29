@@ -35,6 +35,11 @@ func (s ShortData) Sort() {
 	})
 }
 
+// Get returns the short data
+func (s ShortData) Get() []schemas.StoryHackerNews {
+	return s
+}
+
 // Print prints the short stories.
 func (s ShortData) Print() {
 	for _, story := range s {
@@ -54,9 +59,14 @@ func (l LongData) Sort() {
 	})
 }
 
+// Get returns the long data
+func (l LongData) Get() []schemas.StoryHackerNews {
+	return l
+}
+
 // Print prints the long stories.
-func (s LongData) Print() {
-	for _, story := range s {
+func (l LongData) Print() {
+	for _, story := range l {
 		printStory(story)
 	}
 }

@@ -44,7 +44,7 @@ var rootCmd = &cobra.Command{
 
 func Execute() {
 	// set default flags
-	if err := setDefaultFlags(); err != nil {
+	if err := config.SetDefaultFlags(); err != nil {
 		panic(err)
 	}
 

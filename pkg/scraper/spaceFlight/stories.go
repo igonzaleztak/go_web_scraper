@@ -27,6 +27,11 @@ func (s DataSpaceFlight) Len() int {
 // Sort is an empty function since in the spaceFlight API is not defined how to sort the news.
 func (s DataSpaceFlight) Sort() {}
 
+// Get returns the short data
+func (s DataSpaceFlight) Get() []schemas.SpaceFlightNews {
+	return s
+}
+
 // Print prints the stories.
 func (s DataSpaceFlight) Print() {
 	for _, story := range s {
