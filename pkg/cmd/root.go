@@ -24,7 +24,7 @@ var rootCmd = &cobra.Command{
 			return fmt.Errorf("failed to init logs: %v", err)
 		}
 
-		// Do Stuff Here
+		// start scrapers
 		hackerNewsScraper := hackerNews.NewScraper(config.AppConfig.HackersNewsAPI)
 		spaceFlightScraper := spaceFlight.NewScraper(config.AppConfig.SpaceFlightNewsAPI)
 
@@ -34,7 +34,6 @@ var rootCmd = &cobra.Command{
 		errs.Go(func() error {
 			return scraper.StartScraperProcess(hackerNewsScraper)
 		})
-
 		errs.Go(func() error {
 			return scraper.StartScraperProcess(spaceFlightScraper)
 		})
@@ -49,11 +48,9 @@ func Execute() {
 		panic(err)
 	}
 
-	rootCmd.PersistentFlags().VarP(&config.CmdFlags.Mode, "mode", "m", "Mode in which the tool should work. Options: 'api', 'web'")
-	rootCmd.PersistentFlags().VarP(&config.CmdFlags.Verbose, "verbose", "v", "Enable verbose mode")
-	rootCmd.PersistentFlags().IntVarP(&config.CmdFlags.MaxStories, "max-stories", "n", config.CmdFlags.MaxStories, "Indicates the maximum number of stories that the server can fetch")
+	rootCmd.PersistentFlags().VarP(&config.CmdFlags.Verbose, "verbose", "v", "Enable verbose mode. Supported modes Debug: 0, Info: 1")
+	rootCmd.PersistentFlags().IntVarP(&config.CmdFlags.MaxStories, "max-stories", "n", config.CmdFlags.MaxStories, "Defines the number of news that will be fetched from the sources")
 	rootCmd.PersistentFlags().IntVarP(&config.CmdFlags.NumWords, "num-words", "w", config.CmdFlags.NumWords, "Indicates the number of words that a title must have to be considered long")
-	rootCmd.PersistentFlags().VarP(&config.CmdFlags.Section, "section", "s", "Indicates the section of the stories to fetch. Options: 'new', 'past', 'comments', 'ask', 'show', 'jobs' or 'submit'")
 
 	if err := rootCmd.Execute(); err != nil {
 		_, _ = fmt.Fprintln(os.Stderr, err)

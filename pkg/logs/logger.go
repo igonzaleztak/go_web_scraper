@@ -24,7 +24,12 @@ func InitLogger() error {
 
 	fileName := time.Now().Format(time.RFC3339) + ".log"
 	pathToLog := fmt.Sprintf("%s/%s", config.AppConfig.LogsPath, fileName)
-	fmt.Println(pathToLog)
+
+	// create the log folder if it does not exist
+	if _, err := os.Stat(pathToLog); os.IsNotExist(err) {
+		os.Mkdir(config.AppConfig.LogsPath, os.ModePerm)
+	}
+
 	f, err := os.OpenFile(pathToLog, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		return fmt.Errorf("failed to open log file: %w", err)
