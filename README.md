@@ -1,4 +1,11 @@
 # Intelygenz scraper
+- [Intelygenz scraper](#intelygenz-scraper)
+  - [Guidelines](#guidelines)
+  - [Overview](#overview)
+  - [Thought process](#thought-process)
+  - [Installation and usage](#installation-and-usage)
+    - [Local](#local)
+    - [Docker](#docker)
 
 ## Guidelines
 
