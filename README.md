@@ -41,6 +41,17 @@ The tool accepts the following arguments:
 | `-h`, `--help`        | Display help information                                                   | `boolean` | `false`       | No       |
 
 
+**Output**: The tool will print to console the scraped news sorted as it is indicated in the guidelines. You can easily 
+identify the data source at the beginning of the printed line. You can see below how the tool displays the news.
+
+```sh
+# data scraped from Space Flight API
+[spaceflight.scraper] story ID: 23668
+
+# data scraped from Hacker News API
+[hackernews.scraper] story ID: 40523582
+```
+
 ## Thought process
 
 A detailed description of the thought process that I have followed to complete this skill test can be found in the the 
