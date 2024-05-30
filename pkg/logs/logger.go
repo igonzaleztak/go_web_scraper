@@ -7,7 +7,6 @@ import (
 	"intelygenz/pkg/config"
 	"intelygenz/pkg/enums"
 	"os"
-	"time"
 )
 
 func InitLogger() error {
@@ -22,7 +21,7 @@ func InitLogger() error {
 		level = zap.DebugLevel
 	}
 
-	fileName := time.Now().Format(time.RFC3339) + ".log"
+	fileName := "record.log"
 	pathToLog := fmt.Sprintf("%s/%s", config.AppConfig.LogsPath, fileName)
 
 	// create the log folder if it does not exist

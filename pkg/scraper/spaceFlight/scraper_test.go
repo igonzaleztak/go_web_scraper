@@ -20,7 +20,7 @@ func (suite *ScraperSuite) SetupTest() {
 	_ = logs.InitLogger()
 
 	// reduce the number of news to decrease the execution time
-	config.CmdFlags.MaxStories = 15
+	config.CmdFlags.MaxStories = 3
 
 	log.Println("\n-----Setup complete-----")
 }
@@ -39,7 +39,7 @@ func (suite *ScraperSuite) TestNewScraper() {
 }
 
 func (suite *ScraperSuite) TestScrap() {
-	apiURL := config.AppConfig.HackersNewsAPI
+	apiURL := config.AppConfig.SpaceFlightNewsAPI
 	s := NewScraper(apiURL)
 
 	suite.Run("ok", func() {

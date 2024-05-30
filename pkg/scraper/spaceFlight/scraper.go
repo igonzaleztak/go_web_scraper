@@ -15,6 +15,7 @@ type Scraper struct {
 	Data *[]schemas.SpaceFlightNews
 }
 
+// NewScraper creates a new instance of the Scraper struct for space flight news
 func NewScraper(api string) *Scraper {
 	return &Scraper{
 		API:  api,
@@ -22,6 +23,7 @@ func NewScraper(api string) *Scraper {
 	}
 }
 
+// Scrap is the main function that starts the scraping process. It gets the latest stories from the space flight API.
 func (s *Scraper) Scrap() error {
 	logs.Logger.Info("[spaceflight.scraper] starting space flight scraper")
 	uri := fmt.Sprintf("%s/articles/?format=json&limit=%d", s.API, config.CmdFlags.MaxStories)
@@ -55,6 +57,8 @@ func (s *Scraper) Scrap() error {
 	return nil
 }
 
+// Print prints the stories in order: long stories first, then short stories. In this case we do not need to sort the
+// stories, we just need to print them in order.
 func (s *Scraper) Print() {
 	short, long := splitStoriesByLength(*s.Data)
 

@@ -15,6 +15,7 @@ type Scraper struct {
 	Data *[]schemas.StoryHackerNews
 }
 
+// NewScraper creates a new instance of the Scraper struct for hacker news
 func NewScraper(api string) *Scraper {
 	return &Scraper{
 		API:  api,
@@ -22,6 +23,12 @@ func NewScraper(api string) *Scraper {
 	}
 }
 
+// Scrap is the main function that starts the scraping process. It gets the latest stories from the hacker news API.
+// The response from the API is sorted by the latest 500 stories. Therefore, we need to slice them according to the
+// number of stories that we want to fetch.
+//
+// Hacker news API returns only the IDs of the stories. Therefore, we need to fetch the details of each story by making
+// a request to the item endpoint.
 func (s *Scraper) Scrap() error {
 	logs.Logger.Info("[hackernews.scraper] starting hacker news scraper")
 	uri := fmt.Sprintf("%s/newstories.json?print=pretty", s.API)
@@ -67,10 +74,13 @@ func (s *Scraper) Scrap() error {
 	return nil
 }
 
+// GetData returns the data fetched from the hacker news API
 func (s *Scraper) GetData() *[]schemas.StoryHackerNews {
 	return s.Data
 }
 
+// Print prints the stories in order: long stories first, then short stories. In this case we need to sort the stories
+// by number of comments and score respectively.
 func (s *Scraper) Print() {
 	// split stories by length
 	short, long := splitStoriesByLength(*s.Data)

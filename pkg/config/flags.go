@@ -15,9 +15,13 @@ type Flags struct {
 	NumWords   int               // NumWords defines the number of words that a title must have to be considered long
 }
 
+func (f *Flags) ToString() string {
+	return fmt.Sprintf("Verbose: %v, MaxStories: %d, NumWords: %d", f.Verbose, f.MaxStories, f.NumWords)
+}
+
 var CmdFlags = &Flags{}
 
-// SetDefaultFlags  set the default values of the flags
+// SetDefaultFlags  defines the default flag values and the app configuration
 func SetDefaultFlags() error {
 	viper.SetDefault("CONFIG_PATH", "config/config.yaml")
 	viper.AutomaticEnv()

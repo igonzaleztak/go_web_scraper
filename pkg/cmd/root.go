@@ -9,9 +9,6 @@ import (
 	"intelygenz/pkg/scraper"
 	"intelygenz/pkg/scraper/hackerNews"
 	"intelygenz/pkg/scraper/spaceFlight"
-	"os"
-
-	_ "go.uber.org/automaxprocs"
 )
 
 var rootCmd = &cobra.Command{
@@ -42,18 +39,12 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute() {
-	// set default flags
-	if err := config.SetDefaultFlags(); err != nil {
-		panic(err)
-	}
+func Execute() error {
+	return rootCmd.Execute()
+}
 
+func init() {
 	rootCmd.PersistentFlags().VarP(&config.CmdFlags.Verbose, "verbose", "v", "Enable verbose mode. Supported modes Debug: 0, Info: 1")
 	rootCmd.PersistentFlags().IntVarP(&config.CmdFlags.MaxStories, "max-stories", "n", config.CmdFlags.MaxStories, "Defines the number of news that will be fetched from the sources")
 	rootCmd.PersistentFlags().IntVarP(&config.CmdFlags.NumWords, "num-words", "w", config.CmdFlags.NumWords, "Indicates the number of words that a title must have to be considered long")
-
-	if err := rootCmd.Execute(); err != nil {
-		_, _ = fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
 }
